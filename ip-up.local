@@ -1,0 +1,6 @@
+#!/bin/bash
+# Desativa DNS-over-TLS na interface da VPN para permitir que o resolved use o DNS interno
+IFACE="$1"
+
+# Desativa DoT apenas para a interface do openfortivpn
+/usr/bin/resolvectl dnsovertls "$IFACE" no

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=OpenFortiVPN
+Comment=Fortinet VPN Client
+Exec=openfortivpn-gtk
+Icon=openfortivpn-gtk
+Terminal=false
+Type=Application
+Categories=Network;GTK;
+Keywords=vpn;fortinet;fortigate;openfortivpn;
+StartupNotify=true
+StartupWMClass=com.github.openfortivpn.gtk

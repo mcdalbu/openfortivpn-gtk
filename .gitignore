@@ -1,0 +1,23 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build output (RPMs are distributed as release assets)
+dist/
+rpmbuild/
+.rpmbuild/
+*.rpm
+
+# Local application data and diagnostics
+*.log
+stderr.txt
+profiles.json
+.env
+.env.*
+
+# Local agent metadata
+.agents/
+.codex/
+.aws/
