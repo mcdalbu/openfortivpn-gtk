@@ -61,17 +61,35 @@ class MainWindow(Adw.ApplicationWindow):
         menu_btn.set_tooltip_text("Menu")
         
         # Create menu
-        menu = Gtk.PopoverMenu()
+        menu = Gtk.Popover()
         menu_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
         menu_box.set_margin_top(8)
         menu_box.set_margin_bottom(8)
         menu_box.set_margin_start(8)
         menu_box.set_margin_end(8)
+
+        self.tray_check = Gtk.CheckButton(label="Minimizar para o tray ao fechar")
+        self.tray_check.set_active(self.get_application().settings.minimize_to_tray)
+        self.tray_check.connect('toggled', self._on_tray_toggled)
+        menu_box.append(self.tray_check)
+
+        self.tray_hint = Gtk.Label(label="Verificando a área de notificação…")
+        self.tray_hint.add_css_class('dim-label')
+        self.tray_hint.set_wrap(True)
+        self.tray_hint.set_max_width_chars(35)
+        self.tray_hint.set_xalign(0)
+        menu_box.append(self.tray_hint)
+        menu_box.append(Gtk.Separator())
         
         about_btn = Gtk.Button(label="Sobre")
         about_btn.add_css_class('flat')
         about_btn.connect('clicked', self._on_about)
         menu_box.append(about_btn)
+
+        quit_btn = Gtk.Button(label="Sair")
+        quit_btn.add_css_class('flat')
+        quit_btn.set_action_name('app.quit')
+        menu_box.append(quit_btn)
         
         menu.set_child(menu_box)
         menu_btn.set_popover(menu)
@@ -358,6 +376,7 @@ class MainWindow(Adw.ApplicationWindow):
     def _show_secret_dialog(self, title, prompt, hidden):
         if self.vpn_manager.state not in (VPNState.CONNECTING, VPNState.CONNECTED):
             return
+        self.get_application().activate()
         # Create a simple dialog for OTP input
         # Since we want to be compatible with GTK4/Adwaita, we use a modal window
         dialog = Gtk.Window(transient_for=self, modal=True)
@@ -409,12 +428,29 @@ class MainWindow(Adw.ApplicationWindow):
     def _on_clear_logs(self, button):
         """Clear logs."""
         self.logs_buffer.set_text("")
+
+    def show_toast(self, message):
+        self.toast_overlay.add_toast(Adw.Toast(title=message))
+
+    def update_tray_hint(self, available):
+        self.tray_hint.set_text("A VPN continua ativa ao fechar a janela." if available
+                                else "Tray indisponível; a janela ficará aberta.")
+
+    def _on_tray_toggled(self, button):
+        settings = self.get_application().settings
+        if button.get_active() == settings.minimize_to_tray:
+            return
+        try:
+            settings.set_minimize_to_tray(button.get_active())
+        except OSError as exc:
+            button.set_active(settings.minimize_to_tray)
+            self.show_toast(f"Não foi possível salvar a preferência: {exc}")
     
     def _on_about(self, button):
         """Show about dialog."""
         about = Adw.AboutDialog()
         about.set_application_name("OpenFortiVPN GTK")
-        about.set_version("1.0.0")
+        about.set_version("1.1.0")
         about.set_developer_name("OpenFortiVPN GTK Contributors")
         about.set_license_type(Gtk.License.GPL_3_0)
         about.set_comments("Uma interface gráfica moderna para o OpenFortiVPN")

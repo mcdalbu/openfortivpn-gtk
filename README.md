@@ -10,6 +10,7 @@ A modern GTK4/libadwaita interface for OpenFortiVPN.
 - openfortivpn
 - pkexec (polkit) to authorize the connection
 - setsid (util-linux) to control the VPN terminal
+- A StatusNotifier/AppIndicator host for the optional system tray feature
 
 ### Installing dependencies on Debian/Ubuntu:
 
@@ -47,7 +48,7 @@ On Fedora, build and install the RPM with:
 
 ```bash
 ./build-rpm.sh
-sudo dnf install ./dist/openfortivpn-gtk-1.0.0-1.fc44.noarch.rpm
+sudo dnf install ./dist/openfortivpn-gtk-1.1.0-1.fc44.noarch.rpm
 ```
 
 The build requires `rpm-build`, `desktop-file-utils`, and the application
@@ -65,6 +66,20 @@ Run the tests with:
 /usr/bin/python3 -m unittest discover -s tests -v
 ```
 
+In the application menu, enable **Minimizar para o tray ao fechar** to keep the
+app and VPN running when you close the window. The preference is saved across
+sessions. The tray provides **Abrir OpenFortiVPN**, **Desconectar**, and **Sair**.
+**Sair** and Ctrl+Q disconnect the VPN and exit the app.
+
+GNOME needs an AppIndicator/StatusNotifier extension to display tray icons;
+KDE Plasma and other compatible desktops provide a host. If no tray host is
+available, the app keeps its window accessible. Password and OTP requests
+bring the main window back to the foreground.
+
+The tray uses Gio/D-Bus directly, so it does not require GTK3 or an indicator
+library alongside GTK4. Integration tests start an isolated D-Bus daemon and
+require `dbus-daemon` in the build environment.
+
 ## Features
 
 - 🔐 Manage multiple VPN profiles
@@ -72,6 +87,10 @@ Run the tests with:
 - 📋 Real-time connection logs
 - 🌙 Dark/light theme support (follows system)
 - 💾 Profiles saved locally in JSON format
+- 📌 Optional close to tray, with a persistent setting and VPN controls
+
+The red grid and lock icon is inspired by the Fortinet visual identity.
+This is an independent OpenFortiVPN interface, not an official Fortinet product.
 
 ## License
 

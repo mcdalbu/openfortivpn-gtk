@@ -1,7 +1,7 @@
 %global __brp_python_bytecompile %{nil}
 
 Name:           openfortivpn-gtk
-Version:        1.0.0
+Version:        1.1.0
 Release:        1%{?dist}
 Summary:        GTK interface for managing OpenFortiVPN connections
 License:        GPL-3.0-only
@@ -14,6 +14,7 @@ BuildRequires:  gtk4
 BuildRequires:  libadwaita >= 1.5
 BuildRequires:  desktop-file-utils
 BuildRequires:  /usr/bin/setsid
+BuildRequires:  dbus-daemon
 
 Requires:       python3 >= 3.10
 Requires:       python3-gobject
@@ -61,5 +62,8 @@ PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 -m unittest discover -s tests -v
 %{_datadir}/icons/hicolor/128x128/apps/%{name}.png
 
 %changelog
+* Tue Oct 13 2026 OpenFortiVPN GTK Contributors - 1.1.0-1
+- Add optional close-to-tray behavior and a Fortinet-inspired icon.
+
 * Fri Oct 09 2026 OpenFortiVPN GTK Contributors - 1.0.0-1
 - Package the reviewed application and its new icon.

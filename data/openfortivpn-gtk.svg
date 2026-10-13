@@ -1,19 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="OpenFortiVPN GTK">
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#123849"/>
-      <stop offset="1" stop-color="#09212d"/>
-    </linearGradient>
-    <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#66e5cf"/>
-      <stop offset="1" stop-color="#18a9a5"/>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#f23c30"/>
+      <stop offset="1" stop-color="#d91f16"/>
     </linearGradient>
   </defs>
-  <rect x="12" y="12" width="232" height="232" rx="54" fill="url(#background)"/>
-  <path d="M128 38 201 67v52c0 48-27 82-73 104-46-22-73-56-73-104V67z" fill="url(#shield)"/>
-  <path d="M128 57 183 79v40c0 36-18 63-55 83-37-20-55-47-55-83V79z" fill="#113849"/>
-  <path d="M91 113h74" stroke="#72f0da" stroke-width="13" stroke-linecap="round"/>
-  <circle cx="89" cy="113" r="15" fill="#eafff9"/>
-  <circle cx="167" cy="113" r="15" fill="#eafff9"/>
-  <path d="m109 146 17 17 28-33" fill="none" stroke="#eafff9" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="12" y="18" width="232" height="226" rx="50" fill="#a91410"/>
+  <rect x="12" y="12" width="232" height="226" rx="50" fill="url(#red)"/>
+  <g fill="#fff">
+    <rect x="54" y="52" width="40" height="32" rx="2"/>
+    <rect x="102" y="52" width="40" height="32" rx="2"/>
+    <rect x="150" y="52" width="40" height="32" rx="2"/>
+    <rect x="54" y="94" width="40" height="32" rx="2"/>
+    <rect x="150" y="94" width="40" height="32" rx="2"/>
+    <rect x="54" y="136" width="40" height="32" rx="2"/>
+    <rect x="102" y="136" width="40" height="32" rx="2"/>
+    <rect x="150" y="136" width="40" height="32" rx="2"/>
+  </g>
+  <circle cx="189" cy="190" r="36" fill="#fff" stroke="#df281e" stroke-width="8"/>
+  <path d="M178 186v-9a11 11 0 0 1 22 0v9" fill="none" stroke="#ce2018" stroke-width="7" stroke-linecap="round"/>
+  <rect x="173" y="183" width="32" height="26" rx="5" fill="#ce2018"/>
+  <circle cx="189" cy="194" r="3" fill="#fff"/>
+  <path d="M189 194v6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
 </svg>
